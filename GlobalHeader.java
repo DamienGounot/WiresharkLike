@@ -5,13 +5,14 @@ public class GlobalHeader {
     private int version_minor;  /* minor version number */ //osef 
     private int  thiszone;       /* GMT to local correction */ // osef
     private int sigfigs;        /* accuracy of timestamps */ //osef
-    private int snaplen;        /* max length of captured packets, in octets */
+    private String snaplen;        /* max length of captured packets, in octets */
     private int network;        /* data link type */
 
-    public GlobalHeader(String magic_number,int snaplen)
+    public GlobalHeader(byte[] magic_number,byte[] snaplen)
     {
-        this.magic_number = magic_number;
-        this.snaplen = snaplen;
+        this.magic_number = byteArrayToHexa(magic_number);
+        this.snaplen = byteArrayToHexa(snaplen);
+        printGlobalHeaderInfos();
     }
 
     public String getMagicNumer()
@@ -19,15 +20,25 @@ public class GlobalHeader {
         return this.magic_number;
     }
 
-    public int getSnaplen()
+    public String getSnaplen()
     {
-        return snaplen;
+        return this.snaplen;
     }
 
     public void printGlobalHeaderInfos()
     {
-        System.out.println("Magic Number : <"+this.getMagicNumer()+">");
-        System.out.println("SnapLen : <"+this.getSnaplen()+">");
+        System.out.println("Magic Number : <"+getMagicNumer()+">");
+        System.out.println("SnapLen : <"+getSnaplen()+">");
+    }
+
+    public String byteArrayToHexa(byte[] bytes)
+    { 
+        String st = "";
+        
+        for (byte b : bytes) {
+            st += String.format("%02X", b);
+        }
+        return st;
     }
 
 }

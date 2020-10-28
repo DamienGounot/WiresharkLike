@@ -20,12 +20,9 @@ public class Wireshark
 
     public void run(String[] args)
     {
-        String st = convertToString(this.pcap);
-        String magicNumber = getMagicNumber(st);
-        String snaplen = getSnapLen(st);
-        this.globalHeader = new GlobalHeader(magicNumber, Integer.parseInt(snaplen));
-        this.globalHeader.printGlobalHeaderInfos();
-        // NB: getSnaplen me retourne 400 au lieu de 00000400
+        byte[] magicNumber = getMagicNumber(this.pcap);
+        byte[] snaplen = getSnapLen(this.pcap);
+        this.globalHeader = new GlobalHeader(magicNumber,snaplen);
     }
 
 
@@ -38,15 +35,21 @@ public class Wireshark
         return strBuilder.toString();
     }
 
-    public static String getMagicNumber(String st)
+    public static byte[] getMagicNumber(byte[] pcap)
     {
-        String magicNumber = st.substring(0,8);
+        byte[] magicNumber = new byte[4];
+        for (int i = 0; i < 4; i++) {
+            magicNumber[i] = pcap[i];
+        }
         return magicNumber;
     }
 
-    public static String getSnapLen(String st)
+    public static byte[] getSnapLen(byte[] pcap)
     {
-        String snapLen = st.substring(32,40);
+        byte[] snapLen = new byte[4];;
+        for (int i = 16; i < 20; i++) {
+            snapLen[i%4] = pcap[i];
+        }
         return snapLen;
     }
 
