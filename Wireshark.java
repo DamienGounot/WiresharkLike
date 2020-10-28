@@ -23,9 +23,19 @@ public class Wireshark
         byte[] magicNumber = getMagicNumber(this.pcap);
         byte[] snaplen = getSnapLen(this.pcap);
         this.globalHeader = new GlobalHeader(magicNumber,snaplen);
+        this.pcap = checkMagicNumber(globalHeader);
+
     }
 
-
+    private byte[] checkMagicNumber(GlobalHeader globalHeader)
+    {
+        String magicNumber = globalHeader.byteArrayToHexa(getMagicNumber(this.pcap));
+        if (magicNumber.compareTo("D4C3B2A1") == 0) {
+            // reverse le pcap
+        }
+    
+        return this.pcap;
+    }
 
     public static String convertToString(byte[] array) {
         StringBuilder strBuilder = new StringBuilder();
