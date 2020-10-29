@@ -93,7 +93,7 @@ public class Wireshark
                 pcap.get(adresse_dest); // on recupere 6 octets pour @dest
                 pcap.get(adresse_source); // on recupere 6 octets pour @source
                 etherType = pcap.getShort();
-
+                System.out.println("etherType : <"+etherType+">");
                 // en fonction du protocole
 
                     switch (etherType) {

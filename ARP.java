@@ -33,8 +33,10 @@ public class ARP {
         displayField("codeARP",codeARP);
         displayField("MAC_src",MAC_src);
         displayField("IP_src",IP_src);
+        displayIP("IP source",IP_src);
         displayField("MAC_dest",MAC_dest);
         displayField("IP_dest",IP_dest);
+        displayIP("IP destination",IP_dest);
     }
 
     public byte[] getMAC_src() {
@@ -61,5 +63,7 @@ public class ARP {
          }
          System.out.println(">\n");
     }
-    
+    private void displayIP(String label,byte[] array){
+        System.out.print(String.format(label+" %d.%d.%d.%d\n",array[0]& 0xFF,array[1]& 0xFF,array[2]& 0xFF,array[3]& 0xFF));
+    }
 }
