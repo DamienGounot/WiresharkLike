@@ -9,7 +9,7 @@ public class Wireshark
     GlobalHeader globalHeader;
     PacketHeader packetHeader;
     ARP arp;
-
+    IP ip;
     public ByteBuffer pcap;
 
     private int magic_number;   /* magic number */ // On garde
@@ -83,9 +83,7 @@ public class Wireshark
                 ts_usec = pcap.getInt();
                 incl_len = pcap.getInt();
                 orig_len = pcap.getInt();
-                System.out.println("==================Packet Header==================");  
                 packetHeader = new PacketHeader(ts_sec,ts_usec,incl_len,orig_len);
-                System.out.println("==================End of Packet Header==================");
                 incl_len = packetHeader.getIncl_len();
                 
                 pcap.order(ByteOrder.BIG_ENDIAN); // a gerer
@@ -93,7 +91,7 @@ public class Wireshark
                 pcap.get(adresse_dest); // on recupere 6 octets pour @dest
                 pcap.get(adresse_source); // on recupere 6 octets pour @source
                 etherType = pcap.getShort();
-                System.out.println("etherType : <"+etherType+">");
+
                 // en fonction du protocole
 
                     switch (etherType) {
@@ -101,7 +99,7 @@ public class Wireshark
                                 arp = new ARP(pcap.slice());
                             break;
                         case (short)0x0800: // si IPv4
-
+                                ip = new IP(pcap.slice());
                         break;
                         default:
                         System.out.println("Protocole non supporté !");
