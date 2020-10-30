@@ -47,13 +47,15 @@ public class Wireshark
     {
         
         magic_number = pcap.getInt();
+
+        
         if(String.format("%08X", magic_number).equals("A1B2C3D4"))
         {
-            pcap.order(ByteOrder.BIG_ENDIAN); // a gerer
+            pcap.order(ByteOrder.BIG_ENDIAN); 
         }
         else
         {
-            pcap.order(ByteOrder.LITTLE_ENDIAN); // a gerer
+            pcap.order(ByteOrder.LITTLE_ENDIAN); 
         }
               
         version_major = pcap.getShort();
@@ -67,17 +69,18 @@ public class Wireshark
         System.out.println("==================End of Global Header==================");
 
         int i = 24;
-        while (pcap.hasRemaining())
-        {   // parcour du fichier pcap mettre un pcap.remaining
+        while (pcap.hasRemaining()) // parcours du fichier pcap
+        {   
                 
                 if(String.format("%08X", magic_number).equals("A1B2C3D4"))
                 {
-                    pcap.order(ByteOrder.BIG_ENDIAN); // a gerer
+                    pcap.order(ByteOrder.BIG_ENDIAN);
                 }
                 else
                 {
-                    pcap.order(ByteOrder.LITTLE_ENDIAN); // a gerer
+                    pcap.order(ByteOrder.LITTLE_ENDIAN);
                 }
+
                 // recuperation header packet                
                 ts_sec = pcap.getInt();
                 ts_usec = pcap.getInt();
@@ -86,7 +89,7 @@ public class Wireshark
                 packetHeader = new PacketHeader(ts_sec,ts_usec,incl_len,orig_len);
                 incl_len = packetHeader.getIncl_len();
                 
-                pcap.order(ByteOrder.BIG_ENDIAN); // a gerer
+                pcap.order(ByteOrder.BIG_ENDIAN);
 
                 pcap.get(adresse_dest); // on recupere 6 octets pour @dest
                 pcap.get(adresse_source); // on recupere 6 octets pour @source

@@ -36,22 +36,6 @@ public class ARP {
 
     }
 
-    public byte[] getMAC_src() {
-        return this.MAC_src;
-    }
-
-    public byte[] getIP_src() {
-        return this.IP_src;
-    }
-
-    public byte[] getMAC_dest() {
-        return this.MAC_dest;
-    }
-
-    public byte[] getIP_dest() {
-        return this.IP_dest;
-    }
-
     private void displayField(String label,byte[] array){
         System.out.print(label+": <");
         for(int i=0; i< array.length ; i++) {
