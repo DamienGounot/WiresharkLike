@@ -97,11 +97,12 @@ public class Wireshark
                 // en fonction du protocole
 
                     switch (etherType) {
-                        case (short)0x0806: // si ARP
-                        System.out.println("==================Packet==================");  
+                        case (short)0x0806: // si ARP              
                                 arp = new ARP(pcap.slice());
-                        System.out.println("==================End of Packet==================");        
                             break;
+                        case (short)0x0800: // si IPv4
+
+                        break;
                         default:
                         System.out.println("Protocole non supporté !");
                             break;

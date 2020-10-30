@@ -26,17 +26,14 @@ public class ARP {
         data.get(IP_src);
         data.get(MAC_dest);
         data.get(IP_dest);
-        displayField("hardwareType",hardwareType);
-        displayField("protocolType",protocolType);
-        displayField("taille_MAC",taille_MAC);
-        displayField("taille_IP",taille_IP);
-        displayField("codeARP",codeARP);
-        displayField("MAC_src",MAC_src);
-        displayField("IP_src",IP_src);
+        System.out.println("==================Packet==================");
+        System.out.println("Protocole: ARP");
+        displayMAC("MAC_src",MAC_src);
         displayIP("IP source",IP_src);
-        displayField("MAC_dest",MAC_dest);
-        displayField("IP_dest",IP_dest);
+        displayMAC("MAC_dest",MAC_dest);
         displayIP("IP destination",IP_dest);
+        System.out.println("==================End of Packet==================");        
+
     }
 
     public byte[] getMAC_src() {
@@ -61,9 +58,12 @@ public class ARP {
             
             System.out.print(String.format("%02X",array[i]));
          }
-         System.out.println(">\n");
+         System.out.println("\n");
     }
     private void displayIP(String label,byte[] array){
         System.out.print(String.format(label+" %d.%d.%d.%d\n",array[0]& 0xFF,array[1]& 0xFF,array[2]& 0xFF,array[3]& 0xFF));
     }
+    private void displayMAC(String label,byte[] array){
+        System.out.print(String.format(label+" %02X:%02X:%02X:%02X\n",array[0],array[1],array[2],array[3]));
+    }    
 }
