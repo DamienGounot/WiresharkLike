@@ -5,7 +5,7 @@ public class IP {
     private byte[] versionEThlen = new byte[1];
     private byte[] tos = new byte[1];
     private short totalLength;
-    private byte[] ipID = new byte[2];
+    private short ipID;
     private byte[] flagEToffset = new byte[2];
     private byte[] ttl = new byte[1];
     private byte[] protocol4 = new byte[1];
@@ -19,7 +19,7 @@ public class IP {
         data.get(versionEThlen);// osef skip version et hlen
         data.get(tos);
         totalLength = data.getShort();
-        data.get(ipID);
+        ipID = data.getShort();
         data.get(flagEToffset);// osef skip flag et d'offset
         data.get(ttl);
         data.get(protocol4);
@@ -30,7 +30,7 @@ public class IP {
         System.out.println("==================Packet==================");
         System.out.println("Protocole: IP(v4)");
         System.out.println("Total Length: "+String.format("%d", totalLength)+" bytes.");
-        displayHex("Identification (ID)", ipID);
+        System.out.println("Identification (ID): "+ String.format("(%d)", ipID & 0xFFFF));
         displayHProtocole(protocol4);
         displayHex("checkSum", cheksum);
         System.out.print(String.format("IP source: %d.%d.%d.%d\n", ip_src[0] & 0xFF, ip_src[1] & 0xFF, ip_src[2] & 0xFF,

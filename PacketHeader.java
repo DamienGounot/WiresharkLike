@@ -13,7 +13,7 @@ public class PacketHeader {
         this.ts_usec = ts_usec;
         this.incl_len = incl_len;
         this.orig_len = orig_len;
-        printImportantInfos();
+        //printImportantInfos();
     }
 
 
