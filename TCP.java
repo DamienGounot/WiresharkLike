@@ -26,7 +26,7 @@ public class TCP {
         System.out.println("Source port: "+String.format("%d", portSrc & 0xFFFF));
         System.out.println("Destination port: "+String.format("%d", portDest & 0xFFFF));
         displayHex("Checksum", checksum);
-        System.out.println("==================End of Packet==================");
+        System.out.println("==================End of Packet===========");
     }
 
     private void displayHex(String label,byte[] array){

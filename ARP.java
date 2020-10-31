@@ -32,7 +32,7 @@ public class ARP {
         displayIP("IP source",IP_src);
         displayMAC("MAC_dest",MAC_dest);
         displayIP("IP destination",IP_dest);
-        System.out.println("==================End of Packet==================");        
+        System.out.println("==================End of Packet===========");
 
     }
 
