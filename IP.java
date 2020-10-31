@@ -34,13 +34,13 @@ public class IP {
         System.out.println("Total Length: "+String.format("%d", totalLength)+" bytes.");
         System.out.println("Identification (ID): "+ String.format("(%d)", ipID & 0xFFFF));
         displayHProtocole(protocol4);
-        displayHex("checkSum", cheksum);
+        displayHex("Checksum", cheksum);
         System.out.print(String.format("IP source: %d.%d.%d.%d\n", ip_src[0] & 0xFF, ip_src[1] & 0xFF, ip_src[2] & 0xFF,
                 ip_src[3] & 0xFF));
         System.out.print(String.format("IP dest: %d.%d.%d.%d\n", ip_dest[0] & 0xFF, ip_dest[1] & 0xFF,
                 ip_dest[2] & 0xFF, ip_dest[3] & 0xFF));
-        System.out.println("==================End of Packet==================");
-        createNextPacket(protocol4, data);
+        System.out.println("==================End of Packet===========");
+                createNextPacket(protocol4, data);
     }
 
     private void displayHex(String label,byte[] array){
