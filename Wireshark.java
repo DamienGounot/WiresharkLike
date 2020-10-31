@@ -111,7 +111,7 @@ public class Wireshark
 
               i += (16 + incl_len); // (16 octets pour le packet Header)
               pcap.position(i);
-              System.out.println(pcap);
+              //System.out.println(pcap);
         }
     }
 }
