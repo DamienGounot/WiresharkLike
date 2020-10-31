@@ -9,7 +9,7 @@ public class Wireshark
     GlobalHeader globalHeader;
     PacketHeader packetHeader;
     ARP arp;
-
+    IP ip;
     public ByteBuffer pcap;
 
     private int magic_number;   /* magic number */ // On garde
@@ -47,13 +47,15 @@ public class Wireshark
     {
         
         magic_number = pcap.getInt();
+
+        
         if(String.format("%08X", magic_number).equals("A1B2C3D4"))
         {
-            pcap.order(ByteOrder.BIG_ENDIAN); // a gerer
+            pcap.order(ByteOrder.BIG_ENDIAN); 
         }
         else
         {
-            pcap.order(ByteOrder.LITTLE_ENDIAN); // a gerer
+            pcap.order(ByteOrder.LITTLE_ENDIAN); 
         }
               
         version_major = pcap.getShort();
@@ -67,33 +69,32 @@ public class Wireshark
         System.out.println("==================End of Global Header==================");
 
         int i = 24;
-        while (pcap.hasRemaining())
-        {   // parcour du fichier pcap mettre un pcap.remaining
+        while (pcap.hasRemaining()) // parcours du fichier pcap
+        {   
                 
                 if(String.format("%08X", magic_number).equals("A1B2C3D4"))
                 {
-                    pcap.order(ByteOrder.BIG_ENDIAN); // a gerer
+                    pcap.order(ByteOrder.BIG_ENDIAN);
                 }
                 else
                 {
-                    pcap.order(ByteOrder.LITTLE_ENDIAN); // a gerer
+                    pcap.order(ByteOrder.LITTLE_ENDIAN);
                 }
+
                 // recuperation header packet                
                 ts_sec = pcap.getInt();
                 ts_usec = pcap.getInt();
                 incl_len = pcap.getInt();
                 orig_len = pcap.getInt();
-                System.out.println("==================Packet Header==================");  
                 packetHeader = new PacketHeader(ts_sec,ts_usec,incl_len,orig_len);
-                System.out.println("==================End of Packet Header==================");
                 incl_len = packetHeader.getIncl_len();
                 
-                pcap.order(ByteOrder.BIG_ENDIAN); // a gerer
+                pcap.order(ByteOrder.BIG_ENDIAN);
 
                 pcap.get(adresse_dest); // on recupere 6 octets pour @dest
                 pcap.get(adresse_source); // on recupere 6 octets pour @source
                 etherType = pcap.getShort();
-                System.out.println("etherType : <"+etherType+">");
+
                 // en fonction du protocole
 
                     switch (etherType) {
@@ -101,7 +102,7 @@ public class Wireshark
                                 arp = new ARP(pcap.slice());
                             break;
                         case (short)0x0800: // si IPv4
-
+                                ip = new IP(pcap.slice());
                         break;
                         default:
                         System.out.println("Protocole non supporté !");
@@ -110,7 +111,7 @@ public class Wireshark
 
               i += (16 + incl_len); // (16 octets pour le packet Header)
               pcap.position(i);
-              System.out.println(pcap);
+              //System.out.println(pcap);
         }
     }
 }

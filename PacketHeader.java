@@ -35,10 +35,13 @@ public class PacketHeader {
 
     private void printImportantInfos()
     {
+        System.out.println("==================Packet Header==================");  
         System.out.println("ts_sec : <"+getTs_sec()+">");
         System.out.println("ts_usec : <"+getTs_usec()+">");
         System.out.println("incl_len : <"+getIncl_len()+">");
         System.out.println("orig_len : <"+getOrig_len()+">");
+        System.out.println("==================End of Packet Header==================");
+
     }
 
 }
