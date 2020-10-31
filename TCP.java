@@ -13,6 +13,7 @@ public class TCP {
     {
         portSrc = data.getShort();
         portDest = data.getShort();
+
         data.get(sequenceNumber);
         data.get(aquitNumber);
         pourSkipint = data.getInt();
@@ -22,10 +23,8 @@ public class TCP {
 
         System.out.println("==================Packet==================");
         System.out.println("Protocole: TCP");
-        System.out.println("Source port: "+String.format("%d", portSrc));
-        System.out.println("Destination port: "+String.format("%d", portSrc));
-        displayHex("Sequence Number", sequenceNumber);
-        displayHex("Acknowledgment Number", aquitNumber);
+        System.out.println("Source port: "+String.format("%d", portSrc & 0xFFFF));
+        System.out.println("Destination port: "+String.format("%d", portDest & 0xFFFF));
         displayHex("Checksum", checksum);
         System.out.println("==================End of Packet==================");
     }
