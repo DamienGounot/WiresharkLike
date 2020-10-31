@@ -35,7 +35,12 @@ public class Wireshark
         byte[] bytepcap = Files.readAllBytes(Paths.get(args[0]));
         System.out.println(bytepcap.length);
         pcap = ByteBuffer.wrap(bytepcap);
-        run(args);
+        try {
+            run(args);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        
     }
 
 	public static void main(String[] args) throws IOException{	

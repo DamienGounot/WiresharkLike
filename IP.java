@@ -14,6 +14,7 @@ public class IP {
     private byte[] ip_dest = new byte[4];
 
     TCP tcp;
+    UDP udp;
 
     public IP(ByteBuffer data) {
         data.get(versionEThlen);// osef skip version et hlen
@@ -81,6 +82,7 @@ public class IP {
                 tcp = new TCP(data.slice());
                 break;                
             case "11": //UDP
+                udp = new UDP(data.slice());
                 break;
                 case "01": //ICMP
                 break;            
