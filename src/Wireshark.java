@@ -8,8 +8,9 @@ public class Wireshark
 {
     GlobalHeader globalHeader;
     PacketHeader packetHeader;
-    ARP arp;
-    IP ip;
+    // ARP arp;
+    // IP ip;
+    Ethernet ethernet;
     private byte[] bytepcap;
     public ByteBuffer pcap;
 
@@ -26,9 +27,6 @@ public class Wireshark
     private int incl_len;       /* number of octets of packet saved in file */
     private int orig_len;       /* actual length of packet */
 
-    private byte[] adresse_dest = new byte[6];
-    private byte[] adresse_source = new byte[6];
-    private short etherType;
     public static String filter ="";
 
 
@@ -114,26 +112,7 @@ public class Wireshark
                 
                 pcap.order(ByteOrder.BIG_ENDIAN);
 
-                pcap.get(adresse_dest); // on recupere 6 octets pour @dest
-                pcap.get(adresse_source); // on recupere 6 octets pour @source
-                etherType = pcap.getShort();
-
-                // en fonction du protocole
-
-                    switch (etherType) {
-                        case (short)0x0806: // si ARP 
-                                if(filter.equalsIgnoreCase("ARP") || filter.equalsIgnoreCase("all"))
-                                    arp = new ARP(pcap.slice());         
-                                
-                            break;
-                        case (short)0x0800: // si IPv4
-                        if(filter.equalsIgnoreCase("IP") || filter.equalsIgnoreCase("ICMP") || filter.equalsIgnoreCase("TCP") || filter.equalsIgnoreCase("UDP") || filter.equalsIgnoreCase("DHCP") || filter.equalsIgnoreCase("all"))
-                        ip = new IP(pcap.slice());
-                        break;
-                        default:
-                        System.out.println("Protocole non supporté !");
-                            break;
-                    }
+                ethernet = new Ethernet(pcap.slice());
 
               i += (16 + incl_len); // (16 octets pour le packet Header)
               pcap.position(i);

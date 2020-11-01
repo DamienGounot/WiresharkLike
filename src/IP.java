@@ -92,6 +92,7 @@ public class IP {
                 icmp = new ICMP(data.slice());
                 break;            
             default:
+            System.out.println("Protocole non supporté !");
                 break;
         }
     }

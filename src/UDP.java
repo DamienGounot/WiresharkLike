@@ -50,6 +50,7 @@ public class UDP {
                 dhcp = new DHCP(data.slice(),2);
                 break;
             default:
+            System.out.println("Protocole non supporté !");
                 break;
         }
     }
