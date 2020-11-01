@@ -39,7 +39,6 @@ public class UDP {
 
     private void createNextPacket(byte[] array, ByteBuffer data)
     {
-        System.out.println(String.format("NEXT %02X",array[0]));
         String protocole = String.format("%02X",array[0]);
         switch (protocole) {
             case "01": //DHCP request
