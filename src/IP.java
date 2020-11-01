@@ -80,15 +80,19 @@ public class IP {
         String protocole = String.format("%02X",array[0]);
         switch (protocole) {
             case "06": //TCP
+            if(Wireshark.filter.equalsIgnoreCase("TCP") || Wireshark.filter.equalsIgnoreCase("all"))
                 tcp = new TCP(data.slice());
                 break;                
             case "11": //UDP
+                if(Wireshark.filter.equalsIgnoreCase("UDP") || Wireshark.filter.equalsIgnoreCase("DHCP") || Wireshark.filter.equalsIgnoreCase("all"))
                 udp = new UDP(data.slice());
                 break;
                 case "01": //ICMP
+                if(Wireshark.filter.equalsIgnoreCase("ICMP") || Wireshark.filter.equalsIgnoreCase("all"))
                 icmp = new ICMP(data.slice());
                 break;            
             default:
+            System.out.println("Protocole non supporté !");
                 break;
         }
     }

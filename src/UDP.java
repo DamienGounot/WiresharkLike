@@ -42,12 +42,15 @@ public class UDP {
         String protocole = String.format("%02X",array[0]);
         switch (protocole) {
             case "01": //DHCP request
+                if(Wireshark.filter.equalsIgnoreCase("DHCP") || Wireshark.filter.equalsIgnoreCase("all"))
                 dhcp = new DHCP(data.slice(),1);
                 break;                
             case "02": //DHCP reply
+            if(Wireshark.filter.equalsIgnoreCase("DHCP") || Wireshark.filter.equalsIgnoreCase("all"))
                 dhcp = new DHCP(data.slice(),2);
                 break;
             default:
+            System.out.println("Protocole non supporté !");
                 break;
         }
     }

@@ -1,31 +1,46 @@
 WiresharkLike
 
-        /* Idée : une fois que le pcap (un gros byteBuffer) à été initialisé avec le contenu du fichier :
-            On parse les 24 premier octects (car taille fixe)
+java 15.0.1 2020-10-20
+Java(TM) SE Runtime Environment (build 15.0.1+9-18)
+Java HotSpot(TM) 64-Bit Server VM (build 15.0.1+9-18, mixed mode, sharing)
 
-            pour avoir tout ce qu'il faut pour creer un objet Global Header
-            
-            Récupérer la snaplen du Global Header (pour boucler < snaplen)
+Compilation : 
+cd src/
+javac *.java
+
+Launch: 
+java Wireshark [pcapfile] [filter]
+NB: Available filter are: "all" "ARP" "IP" "ICMP" "TCP" "UDP" "DHCP"
+example: java Wireshark ../Captures/all.pcap ARP
+
+The Capture folder contains some .pcap files
 
 
-            BOUCLE SUR SNAPLEN 
+├── Captures
+│   ├── all.pcap
+│   ├── ARP.pcap
+│   ├── DHCP.pcap
+│   ├── ICMP.pcap
+│   └── IP.pcap
+├── README.md
+└── src
+    ├── ARP.java
+    ├── DHCP.java
+    ├── Ethernet.java
+    ├── GlobalHeader.java
+    ├── ICMP.java
+    ├── IP.java
+    ├── PacketData.java
+    ├── PacketHeader.java
+    ├── TCP.java
+    ├── UDP.java
+    └── Wireshark.java
 
-            On parse les 16 prochains octects (car taille fixe) pour creer un objet PacketHeader
 
-            
-            Récupérer la inc_len du PacketHeader
-
-            creer un objet PacketData () 
-                NB --> avec la snaplen du PacketHeader on peut boucler pour init le PacketData
-
-            en fonction de l'Ethertype du PacketData:
-
-                creer un objet <type de protocole> (en lui passant le champ data (byteBuffer) du PacketData)
-                init correctement l'objet <type de protocole>
-                le print
-
-            NB : comment boucler sur le pcap ?
-            NB: Ok de parser dans le main, affecter a des variables et les passer dans le construct ?
-            ( en gros (7 + 4 + 4) variables dans le main, systématiqument remis a jour )
-            NB : On est d'accord que c'est suffisant (même si un peu dégueu ?) ? (voir constucteurs et attributs)
-        */
+-------------------------
+Avancement : 
+Parsing des protocoles (Ethernet,ARP,IP,TCP,UDP,ICMP,DHCP) à partir d'un fichier pcap
+Affichage des informations importantes condensées.
+Pour une trame, affichage successif des paquets encapsulés.
+exemple: pour un ping, affichage des infos IP, puis ICMP (les infos de la trame ethernet
+Filtrage basique, exemple; si filtre TCP appliqué, affiche les informations des couches < TCP.
