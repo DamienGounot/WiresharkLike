@@ -42,4 +42,4 @@ Parsing des protocoles (Ethernet,ARP,IP,TCP,UDP,ICMP,DHCP) à partir d'un fichie
 Affichage des informations importantes condensées. \
 Pour une trame, affichage successif des paquets encapsulés. \
 exemple: pour un ping, affichage des infos IP, puis ICMP (les infos de la trame ethernet \
-Filtrage basique, exemple; si filtre TCP appliqué, affiche les informations des couches < TCP. \
+Filtrage basique, exemple; si filtre TCP appliqué, affiche les informations des couches < TCP. 
