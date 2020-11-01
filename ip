@@ -1,0 +1,63 @@
+==================Packet==================
+Protocole: IP(v4)
+Total Length: 72 bytes.
+Identification (ID): (27172)
+Protocole de niveau supérieur: UDP
+Checksum: 0x3EA6
+IP source: 192.168.136.2
+IP dest: 192.168.136.135
+==================End of Packet===========
+==================Packet==================
+Protocole: IP(v4)
+Total Length: 63 bytes.
+Identification (ID): (55915)
+Protocole de niveau supérieur: UDP
+Checksum: 0xB59D
+IP source: 192.168.136.1
+IP dest: 224.0.0.251
+==================End of Packet===========
+==================Packet==================
+Protocole: IP(v4)
+Total Length: 328 bytes.
+Identification (ID): (0)
+Protocole de niveau supérieur: UDP
+Checksum: 0x3996
+IP source: 0.0.0.0
+IP dest: 255.255.255.255
+==================End of Packet===========
+==================Packet==================
+Protocole: IP(v4)
+Total Length: 328 bytes.
+Identification (ID): (0)
+Protocole de niveau supérieur: UDP
+Checksum: 0x3996
+IP source: 0.0.0.0
+IP dest: 255.255.255.255
+==================End of Packet===========
+==================Packet==================
+Protocole: IP(v4)
+Total Length: 328 bytes.
+Identification (ID): (0)
+Protocole de niveau supérieur: UDP
+Checksum: 0x16BE
+IP source: 192.168.136.254
+IP dest: 192.168.136.136
+==================End of Packet===========
+==================Packet==================
+Protocole: IP(v4)
+Total Length: 328 bytes.
+Identification (ID): (0)
+Protocole de niveau supérieur: UDP
+Checksum: 0x3996
+IP source: 0.0.0.0
+IP dest: 255.255.255.255
+==================End of Packet===========
+==================Packet==================
+Protocole: IP(v4)
+Total Length: 328 bytes.
+Identification (ID): (0)
+Protocole de niveau supérieur: UDP
+Checksum: 0x16BE
+IP source: 192.168.136.254
+IP dest: 192.168.136.136
+==================End of Packet===========

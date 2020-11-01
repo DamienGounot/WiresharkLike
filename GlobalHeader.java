@@ -19,7 +19,8 @@ public class GlobalHeader {
         this.sigfigs = sigfigs;
         this.snaplen = snaplen;
         this.network = network;
-        printImportantInfos();
+        
+        //printInfos();
     }
 
 
@@ -57,8 +58,9 @@ public class GlobalHeader {
         return this.snaplen;
     }
 
-    public void printImportantInfos()
+    public void printInfos()
     {
+        System.out.println("==================Global Header==================");  
         System.out.println("Magic Number : <"+String.format("%08X", getMagicNumer())+">");
         System.out.println("Major Version : <"+getVersion_major()+">");
         System.out.println("Minor Version : <"+getVersion_minor()+">");
@@ -66,6 +68,8 @@ public class GlobalHeader {
         System.out.println("Sigfigs : <"+getSigfigs()+">");
         System.out.println("SnapLen : <"+getSnaplen()+">");
         System.out.println("Network : <"+getNetwork()+">");
+        System.out.println("==================End of Global Header==================");
+
     }
 
 }

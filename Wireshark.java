@@ -10,6 +10,7 @@ public class Wireshark
     PacketHeader packetHeader;
     ARP arp;
     IP ip;
+    private byte[] bytepcap;
     public ByteBuffer pcap;
 
     private int magic_number;   /* magic number */ // On garde
@@ -28,12 +29,28 @@ public class Wireshark
     private byte[] adresse_dest = new byte[6];
     private byte[] adresse_source = new byte[6];
     private short etherType;
+    public static String filter ="";
 
 
     public Wireshark(String[] args) throws IOException
     {
-        byte[] bytepcap = Files.readAllBytes(Paths.get(args[0]));
-        System.out.println(bytepcap.length);
+        try {
+            filter = args[1];
+        } catch (Exception e) {
+            System.out.println("Error: you need a filter value !");
+            System.out.println("Usage is: java Wireshark <pcapfile> <filter>");
+            System.out.println("Available filter are: <all> <ARP> <IP> <ICMP> <TCP> <UDP> <DHCP>");
+            System.exit(0);
+        }
+        try {
+             bytepcap = Files.readAllBytes(Paths.get(args[0]));
+        } catch (Exception e) {
+            System.out.println("Error: you need a valid file path !");
+            System.out.println("Usage is: java Wireshark <pcapfile> <filter>");
+            System.out.println("Available filter are: <all> <ARP> <IP> <ICMP> <TCP> <UDP> <DHCP>");
+            System.exit(0);           
+        }
+        
         pcap = ByteBuffer.wrap(bytepcap);
         try {
             run(args);
@@ -69,11 +86,12 @@ public class Wireshark
         sigfigs = pcap.getInt();
         snaplen = pcap.getInt();
         network = pcap.getInt();
-        System.out.println("==================Global Header==================");  
+
+        
         globalHeader = new GlobalHeader(magic_number, version_major, version_minor, thiszone, sigfigs, snaplen, network);
-        System.out.println("==================End of Global Header==================");
 
         int i = 24;
+
         while (pcap.hasRemaining()) // parcours du fichier pcap
         {   
                 
@@ -103,11 +121,14 @@ public class Wireshark
                 // en fonction du protocole
 
                     switch (etherType) {
-                        case (short)0x0806: // si ARP              
-                                arp = new ARP(pcap.slice());
+                        case (short)0x0806: // si ARP 
+                                if(filter.equalsIgnoreCase("ARP") || filter.equalsIgnoreCase("all"))
+                                    arp = new ARP(pcap.slice());         
+                                
                             break;
                         case (short)0x0800: // si IPv4
-                                ip = new IP(pcap.slice());
+                        if(filter.equalsIgnoreCase("IP") || filter.equalsIgnoreCase("ICMP") || filter.equalsIgnoreCase("TCP") || filter.equalsIgnoreCase("UDP") || filter.equalsIgnoreCase("DHCP") || filter.equalsIgnoreCase("all"))
+                        ip = new IP(pcap.slice());
                         break;
                         default:
                         System.out.println("Protocole non supporté !");
