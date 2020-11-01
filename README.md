@@ -11,9 +11,9 @@ javac *.java
 Launch: 
 java Wireshark [pcapfile] [filter] \
 NB: Available filter are: "all" "ARP" "IP" "ICMP" "TCP" "UDP" "DHCP" \
-example: java Wireshark ../Captures/all.pcap ARP \
+example: java Wireshark ../Captures/all.pcap ARP 
 
-The Capture folder contains some .pcap files \
+The Capture folder contains some .pcap files 
 
  \
 ├── Captures \
@@ -34,7 +34,7 @@ The Capture folder contains some .pcap files \
     ├── PacketHeader.java \
     ├── TCP.java \
     ├── UDP.java \
-    └── Wireshark.java \
+    └── Wireshark.java 
 
 -------------------------
 Avancement : 
